@@ -57,3 +57,94 @@ function validateRate(value, name) {
 }
 
 console.log(validateCart(cart)); 
+
+function calculateCart(
+    cart,
+    discountRate,
+    taxRate
+) {
+
+    const cartError =
+        validateCart(cart);
+
+    if (cartError) {
+
+        return {
+            error: cartError
+        };
+    }
+
+    const discountError =
+        validateRate(
+            discountRate,
+            "Discount"
+        );
+
+
+    if (discountError) {
+
+        return {
+            error: discountError
+        };
+    }
+
+    const taxError =
+        validateRate(
+            taxRate,
+            "Tax"
+        );
+
+
+    if (taxError) {
+
+        return {
+            error: taxError
+        };
+    }
+
+    const total =
+        calculateTotal(cart);
+
+    const discountAmount =
+        Math.round(
+            total *
+            discountRate /
+            100
+        );
+
+    const afterDiscount =
+        total -
+        discountAmount;
+
+    const taxAmount =
+        Math.round(
+            afterDiscount *
+            taxRate /
+            100
+        );
+
+
+    const finalTotal =
+        afterDiscount +
+        taxAmount;
+
+
+    return {
+
+        total: total,
+
+        discountAmount:
+            discountAmount,
+
+        taxAmount:
+            taxAmount,
+
+        finalTotal:
+            finalTotal
+    };
+}
+
+
+console.log(
+    calculateCart(cart,10,8)
+);
