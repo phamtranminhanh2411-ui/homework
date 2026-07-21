@@ -40,3 +40,20 @@ function validateCart(cart) {
 const error = validateCart(cart);
 
 console.log(error);
+
+function validateRate(value, name) {
+
+    if (
+        typeof value !== "number" ||
+        !Number.isFinite(value) ||
+        value < 0 ||
+        value > 100
+    ) {
+
+        return name + " must be a number between 0 and 100";
+    }
+
+    return null;
+}
+
+console.log(validateCart(cart)); 
