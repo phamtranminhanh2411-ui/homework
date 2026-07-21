@@ -58,11 +58,7 @@ function validateRate(value, name) {
 
 console.log(validateCart(cart)); 
 
-function calculateCart(
-    cart,
-    discountRate,
-    taxRate
-) {
+function calculateCart(cart,discountRate,taxRate) {
 
     const cartError =
         validateCart(cart);
@@ -74,11 +70,7 @@ function calculateCart(
         };
     }
 
-    const discountError =
-        validateRate(
-            discountRate,
-            "Discount"
-        );
+    const discountError = validateRate(discountRate,"Discount");
 
 
     if (discountError) {
@@ -89,10 +81,7 @@ function calculateCart(
     }
 
     const taxError =
-        validateRate(
-            taxRate,
-            "Tax"
-        );
+        validateRate(taxRate,"Tax");
 
 
     if (taxError) {
@@ -106,27 +95,17 @@ function calculateCart(
         calculateTotal(cart);
 
     const discountAmount =
-        Math.round(
-            total *
-            discountRate /
-            100
-        );
+        Math.round(total *discountRate /100);
 
     const afterDiscount =
         total -
         discountAmount;
 
     const taxAmount =
-        Math.round(
-            afterDiscount *
-            taxRate /
-            100
-        );
+        Math.round(afterDiscount *taxRate /100);
 
 
-    const finalTotal =
-        afterDiscount +
-        taxAmount;
+    const finalTotal = afterDiscount + taxAmount;
 
 
     return {
@@ -144,7 +123,25 @@ function calculateCart(
     };
 }
 
-
 console.log(
     calculateCart(cart,10,8)
+);
+
+// Test cases
+//Case 1: discount rate 0%, tax rate 8%
+
+console.log(
+    calculateCart(cart,0,8)
+);
+
+//Case 2: discount rate 10%, tax rate 0%
+
+console.log(
+    calculateCart(cart,10,0)
+);
+
+//Case 3: Invalid cart
+
+console.log(
+    calculateCart(10,10)
 );
