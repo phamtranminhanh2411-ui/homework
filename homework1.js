@@ -24,3 +24,19 @@ function calculateTotal(cart) {
 }
 const total = calculateTotal(cart);
 console.log("Total price: " + total);
+
+function validateCart(cart) {
+    if (!Array.isArray(cart)) {
+        return ("Cart must be an array");}
+
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (!item || typeof item.name !== "string" || typeof item.price !== "number" || typeof item.quantity !== "number") {
+            return ("Invalid item in cart");
+        }
+    }
+    return null;
+}
+const error = validateCart(cart);
+
+console.log(error);
